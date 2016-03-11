@@ -1,5 +1,5 @@
-var randomFirstNameArray = ['Enrique','Hank','Biz','Brady','Reverie'];
-var randomLastNameArray = ['Stinker','Trumpeter','Poofer', 'The Destroyer','Tooter'];
+var randomFirstNameArray = ['Enrique','Hank','Biz','Brady'];
+var randomLastNameArray = ['Ortega','Andre','Cook', 'Peterson'];
 
 var randomName = function(){
   return randomFirstNameArray[randomNumber(0,randomFirstNameArray.length - 1)] + " " + randomLastNameArray[randomNumber(0,randomLastNameArray.length - 1)];

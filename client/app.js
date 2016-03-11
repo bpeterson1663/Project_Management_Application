@@ -1,4 +1,4 @@
-var randomCompany = ["Sub Prime Academy", "The Turdery", "Code Farty 2", "Target On Your Back", "Rocket Fitty Cent"];
+var randomCompany = ["Prime Academy", "The Nerdery", "Code 42", "Target", "Rocket Fifty Five"];
 var staff = {};
 var maxFrontEndPoints = 60;
 var maxClientPoints = 60;
@@ -36,11 +36,7 @@ function createProject(){
   clientsideScrum = randomClientPoints();
   serverScrum = randomServerPoints()
   $('.projectContainer').empty();
-  //var company = randomCompanyGenerator();
-  //var frontEndPoints = randomFrontEndPoints();
-  //var clientPoints = randomClientPoints();
-  //var serverPoints = randomServerPoints();
-  //$('.container').append('<div class="projectContainer"></div>');
+
   $('.projectContainer').append('<ul><h2>' + randomCompanyGenerator() + '</h2><li>Front-End Scrum Points: ' + frontEndScrum + '</li><li>Clientside Scrum Points: ' + clientsideScrum +'</li><li>Serverside Scrum Points: '+ serverScrum +'</li></ul>');
   $('.projectContainer').append('<button class="assignStaff">Assign Staff</button>');
 
@@ -77,21 +73,10 @@ function assignStaff(){
       matchSkills(staff);
     }
   });
-
-
-  // for (var i = 0; i < sprintsArray.length; i++) {
-  //   totalSprints += sprintsArray[i];
-  // }
-
-  //$('.projectContainer').append('<p>Weeks until completion: ' + (totalSprints / sprintsArray.length) + '</p>');
-
-  // console.log(totalSprints);
-  // console.log(sprintsArray);
 }
 
 function matchSkills(staff){
 
-  // for(var i = 0; i < 10 ; i++){
     if (staff.skill == 'Clientside Logic' && clientLogicFilled == false){
         $('.projectContainer').append('<div class="clientside-container"></div>');
         $('.clientside-container').append('<h2>' + staff.name + '</h2>');
@@ -107,6 +92,7 @@ function matchSkills(staff){
         console.log(staff.skill , "filled!");
         positionFilled++;
     }
+
     if (staff.skill == 'Front End' && frontEndFilled == false){
         $('.projectContainer').append('<div class="frontend-container"></div>');
         $('.frontend-container').append('<h2>' + staff.name + '</h2>');
@@ -135,10 +121,12 @@ function matchSkills(staff){
           console.log(staff.skill , "filled!");
           positionFilled++;
         }
+
       if(positionFilled < 3){
         staff = {};
         assignStaff();
       }
+
       if(positionFilled == 3){
         for (var i = 0; i < sprintsArray.length; i++) {
           totalSprints += sprintsArray[i];
@@ -148,6 +136,4 @@ function matchSkills(staff){
         console.log(sprintsArray);
       }
 
-    // console.log("i = " + i);
-  // }
 }
