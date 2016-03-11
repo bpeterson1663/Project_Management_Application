@@ -7,6 +7,9 @@ var clientLogicFilled = false;
 var frontEndFilled = false;
 var serverLogicFilled = false;
 var positionFilled = 0;
+var frontEndScrum = 0;
+var clientsideScrum = 0;
+var serverScrum = 0;
 
 $(document).ready(function(){
   $('body').prepend('<button class="generate">Generate Project</button>');
@@ -14,21 +17,28 @@ $(document).ready(function(){
 
   $('body').on('click', '.generate' , createProject);
 
-  $('.container').on('click', '.assignStaff', assignStaff);
+  $('.projectContainer').on('click', 'button', assignStaff);
 });
 
 function createProject(){
-    $('.container').empty();
-    //var company = randomCompanyGenerator();
-    //var frontEndPoints = randomFrontEndPoints();
-    //var clientPoints = randomClientPoints();
-    //var serverPoints = randomServerPoints();
-    $('.container').append('<div class="projectContainer"></div>');
-    $('.projectContainer').append('<ul><li>'+randomCompanyGenerator()+'</li><li>'+randomFrontEndPoints()+'</li><li>'+randomClientPoints()+'</li><li>'+randomServerPoints()+'</li></ul>');
-    $('ul').after('<button class="assignStaff">Assign Staff</button>');
+  positionFilled = 0;
+  clientLogicFilled = false;
+  frontEndFilled = false;
+  serverLogicFilled = false;
+  frontEndScrum = randomFrontEndPoints();
+  clientsideScrum = randomClientPoints();
+  serverScrum = randomServerPoints()
+  $('.projectContainer').empty();
+  //var company = randomCompanyGenerator();
+  //var frontEndPoints = randomFrontEndPoints();
+  //var clientPoints = randomClientPoints();
+  //var serverPoints = randomServerPoints();
+  //$('.container').append('<div class="projectContainer"></div>');
+  $('.projectContainer').append('<ul><h2>' + randomCompanyGenerator() + '</h2><li>Front-End Scrum Points: ' + frontEndScrum + '</li><li>Clientside Scrum Points: ' + clientsideScrum +'</li><li>Serverside Scrum Points: '+ serverScrum +'</li></ul>');
+  $('.projectContainer').append('<button class="assignStaff">Assign Staff</button>');
 }
 
-function randomCompanyGenerator(){
+var randomCompanyGenerator = function (){
     return randomCompany[randomNumber(0, randomCompany.length -1)];
 }
 
@@ -49,8 +59,6 @@ function randomNumber(min, max){
 }
 
 function assignStaff(){
-  // var j = 0;
-      while (positionFilled < 3){
         $.ajax({
           type: 'GET',
           url: '/staff',
@@ -58,54 +66,60 @@ function assignStaff(){
             staff.name = data.name;
             staff.skill = data.skill;
             staff.sprint = data.sprint;
+            matchSkills(staff);
           }
         });
-        matchSkills(staff);
-        // j++;
-      }
+
 }
 
 function matchSkills(staff){
+
   // for(var i = 0; i < 10 ; i++){
     if (staff.skill == 'Clientside Logic' && clientLogicFilled == false){
-        $('.projectContainer').after('<div class="clientside-container"></div>');
+        $('.projectContainer').append('<div class="clientside-container"></div>');
         $('.clientside-container').append('<h2>' + staff.name + '</h2>');
         $('.clientside-container').append('<p>Skill: ' + staff.skill + '</p>');
         $('.clientside-container').append('<p>Average Sprints: ' + staff.sprint + '</p>');
+        $('.clientside-container').append('<p>Sprints till completion: ' + Math.ceil(clientsideScrum / staff.sprint) + '</p>');
+
+
+
         clientLogicFilled = true;
         console.log(staff.skill , "filled!");
         positionFilled++;
     }
     if (staff.skill == 'Front End' && frontEndFilled == false){
-        $('.projectContainer').after('<div class="frontend-container"></div>');
+        $('.projectContainer').append('<div class="frontend-container"></div>');
         $('.frontend-container').append('<h2>' + staff.name + '</h2>');
         $('.frontend-container').append('<p>Skill: ' + staff.skill + '</p>');
         $('.frontend-container').append('<p>Average Sprints: ' + staff.sprint + '</p>');
+        $('.frontend-container').append('<p>Sprints till completion: ' + Math.ceil(frontEndScrum / staff.sprint) + '</p>');
+
         // $('.frontend-container').append('<p>''</p>');
         frontEndFilled = true;
         console.log(staff.skill , "filled!");
         positionFilled++;
       }
     if (staff.skill == 'Serverside Logic' && serverLogicFilled == false){
-          $('.projectContainer').after('<div class="serverside-container"></div>');
+          $('.projectContainer').append('<div class="serverside-container"></div>');
           $('.serverside-container').append('<h2>' + staff.name + '</h2>');
           $('.serverside-container').append('<p>Skill: ' + staff.skill + '</p>');
           $('.serverside-container').append('<p>Average Sprints: ' + staff.sprint + '</p>');
+          $('.serverside-container').append('<p>Sprints till completion: ' + Math.ceil(serverScrum / staff.sprint) + '</p>');
+
           serverLogicFilled = true;
           console.log(staff.skill , "filled!");
           positionFilled++;
         }
-    staff = {};
-    // $.ajax({
-    //   type: 'GET',
-    //   url: '/staff',
-    //   success: function(data){
-    //     staff.name = data.name;
-    //     staff.skill = data.skill;
-    //     staff.sprint = data.sprint;
-    //   }
-    // });
+      if(positionFilled < 3){
+        staff = {};
+        assignStaff();
+      }
 
     // console.log("i = " + i);
   // }
+}
+
+function appendEmployee() {
+
 }
