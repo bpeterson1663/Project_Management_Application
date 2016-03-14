@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var $ = require('jQuery');
 var fullName = require('../modules/ranName.js');
 var skills = require('../modules/ranSkill.js');
 var scrum = require('../modules/ranScrum.js');
