@@ -1,5 +1,9 @@
 # project_management_app
 
+http://fathomless-ravine-40229.herokuapp.com/
+
+Prime Digital Academy Assignment
+
 Project Management Server Application
 For this challenge, you are going to be creating a tool for Project Management to use. The tool will create random employees with a name, specific skill sets, and how many 'Scrum Points' that employee is capable of completing in a 'Sprint'. You need not know all the parts of 'Scrum Points' and 'Sprints' to complete this project, down below will explain what role they plan in this application. The logic will be split between both the Client and the Server.
 
