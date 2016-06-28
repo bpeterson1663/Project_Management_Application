@@ -1,8 +1,12 @@
-# project_management_app
+# Project Management Application
+
+This was a group project I worked on at Prime Digital Academy with three other developers. The assignment was to create an application that would randomly assign a front-end developer, clientside logic developer, and serverside logic developer to complete a project. 
+
+Feel free to click on the link below to check it out.
 
 http://fathomless-ravine-40229.herokuapp.com/
 
-Prime Digital Academy Assignment
+##Directions
 
 Project Management Server Application
 For this challenge, you are going to be creating a tool for Project Management to use. The tool will create random employees with a name, specific skill sets, and how many 'Scrum Points' that employee is capable of completing in a 'Sprint'. You need not know all the parts of 'Scrum Points' and 'Sprints' to complete this project, down below will explain what role they plan in this application. The logic will be split between both the Client and the Server.
